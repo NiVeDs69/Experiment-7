@@ -1,107 +1,62 @@
-import java.util.Random;
+import java.util.*;
 
-class Square extends Thread
-
-{
-
- int x;
-
- Square(int n)
-
- {
-
- x = n;
-
- }
-
- public void run()
-
- {
-
- int sqr = x * x;
-
- System.out.println("Square of " + x + " = " + sqr );
-
- }
-
+class RnoThread extends Thread {
+	public void run() 
+	{
+	        Scanner obj = new Scanner(System.in);
+	        
+		Random random = new Random();
+		System.out.println("how many time to create random integer");
+		int q = obj.nextInt();
+		for (int i = 0; i < q; i++) {
+			int randomInt = random.nextInt(100);
+			System.out.println("Random Integer generated : " + randomInt);
+			if((randomInt%2) == 0) {
+				SThread Thread = new SThread(randomInt);
+				Thread.start();
+			}
+			else {
+				CThread Thread = new CThread(randomInt);
+				Thread.start();
+			}
+			try {
+				Thread.sleep(1000);
+			} 
+			catch (InterruptedException ex) {
+				System.out.println(ex);
+			}
+		}
+	}
 }
 
-class Cube extends Thread
+class SThread extends Thread {
+	int n;
 
-{
+	SThread(int rN) 
+	{
+		n = rN;
+	}
 
- int x;
-
- Cube(int n)
-
- {x = n;
-
- }
-
- public void run()
-
- {
-
- int cub = x * x * x;
-
- System.out.println("Cube of " + x + " = " + cub );
-
- }
-
+      public void run() {
+		System.out.println("Square of " + n + " = " + (n * n));
+	          }
 }
 
-class Number extends Thread
+class CThread extends Thread {
+	int n;
 
-{
+	CThread(int rN) {
+		n = rN;
+	}
 
- public void run()
-
- {
-
- Random random = new Random();
-
- for(int i =0; i<5; i++)
-
- {
-
- int randomInteger = random.nextInt(100);
-
- System.out.println("Random Integer generated : " + randomInteger);
-
- Square s = new Square(randomInteger);
-
- s.start();
-
- Cube c = new Cube(randomInteger);
-
- c.start();
-
- try {
-
- Thread.sleep(1000);
-
-} catch (InterruptedException ex) {
-
- System.out.println(ex);
-
+	public void run() {
+		System.out.println("Cube of " + n + " = " + n*n*n);
+	}
 }
-
- }
-
- }
-
-}
-
-public class Thr {
-
- public static void main(String args[])
-
- {
-
- Number n = new Number();
-
- n.start();
-
- }
-
+class squarecube {
+	public static void main(String args[]) 
+	{
+		RnoThread Thread = new RnoThread();
+		  Thread.start();
+	}
 }
